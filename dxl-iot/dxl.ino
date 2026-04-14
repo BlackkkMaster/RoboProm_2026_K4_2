@@ -3,12 +3,10 @@
 #include <EEPROM.h>
 #include "DxlMaster.h"
 
-// Motor configuration
 const uint8_t id = 1;
 int16_t speed = -512;
 const long unsigned int baudrate = 57600;
 
-// UDP configuration
 #define UDP_PORT 8888
 IPAddress MyIP(192, 168, 43, 13);
 
@@ -16,14 +14,12 @@ EthernetUDP udp;
 char packetBuffer[UDP_TX_PACKET_MAX_SIZE];
 byte mac[6];
 
-// Motor control flag
 bool motorEnabled = false;
 DynamixelMotor motor(id);
 
 void setup() {
   Serial.begin(115200);
   
-  // Setup MAC address from IP
   mac[0] = MyIP[0];
   mac[1] = MyIP[1];
   mac[2] = MyIP[2];
@@ -31,7 +27,6 @@ void setup() {
   mac[4] = MyIP[2];
   mac[5] = MyIP[3];
   
-  // Initialize Ethernet
   Ethernet.begin(mac, MyIP);
   udp.begin(UDP_PORT);
   
@@ -42,11 +37,9 @@ void setup() {
   Serial.println("Commands: k:1 - enable motor, k:0 - disable motor");
   Serial.println("----------------------");
   
-  // Initialize motor
   DxlMaster.begin(baudrate);
   delay(100);
   
-  // Check if we can communicate with the motor
   uint8_t status = motor.init();
   if(status != DYN_STATUS_OK) {
     Serial.println("Motor initialization failed!");
@@ -56,7 +49,7 @@ void setup() {
   Serial.println("Motor initialized successfully");
   motor.enableTorque();  
   motor.wheelMode();
-  motor.speed(0); // Start with motor stopped
+  motor.speed(0); 
 }
 
 void processUdp() {
@@ -72,9 +65,8 @@ void processUdp() {
     Serial.print(", port ");
     Serial.println(udp.remotePort());
     
-    // Read packet
     udp.read(packetBuffer, UDP_TX_PACKET_MAX_SIZE - 1);
-    packetBuffer[packetSize] = '\0'; // Null terminate
+    packetBuffer[packetSize] = '\0'; 
     
     Serial.print("Command: ");
     Serial.println(packetBuffer);
