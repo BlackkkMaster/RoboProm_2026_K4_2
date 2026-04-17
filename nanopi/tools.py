@@ -38,15 +38,16 @@ class Manipulator:
     def to_box(self):
         self.home()
         self.toPoint(250, 210, 98, -90, 1)
-        self.toPoint(100, 100, 150, -90, 1)
+        self.toPoint(200, 100, 200, -90, 1)
         self.toPoint(10, 260, 25, -90, 1)
         self.toPoint(10, 260, 25, -90, 0)
         self.toPoint(200, 0, 200, -90)
 
     def from_box(self):
         self.home()
-        self.toPoint(20, -210, 0, -90, 1)
-        self.toPoint(-20, -210, 0, -90, 1)
+        self.toPoint(0, -280, 100, -90, 0)
+        self.toPoint(0, -280, -10, -90, 1)
+        self.toPoint(0, -280, 150, -90, 1)
         self.toPoint(250, -210, 100, -90, 0)
 
     def move_box_right(self):
@@ -67,6 +68,27 @@ class Manipulator:
         self.toPoint(0, -280, 20, -100)
 
         self.toPoint(200, 0, 200, -90)
+
+    def move_box_left(self):
+        self.home()
+
+        self.toPoint(0, -230, 200, -180)
+        self.toPoint(0, -230, 25, -180)
+
+        self.toPoint(0, -195, 25, -270)
+        self.toPoint(0, -195, 200, -270)
+
+        self.toPoint(200, 0, 200, -180)
+        self.toPoint(200, 0, 200, -180)
+
+        self.toPoint(0, 300, 200, -100)
+        self.toPoint(0, 300, 25, -100)
+        self.toPoint(0, 185, 20, -100)
+        self.toPoint(0, 230, 20, -100)
+
+        self.toPoint(0, 280, 20, -260)
+
+        self.home()
 
 
 class Conveer:

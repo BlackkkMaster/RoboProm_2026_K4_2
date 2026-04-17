@@ -1,6 +1,6 @@
 from tools import Manipulator, Conveer
 import socket
-
+import time
 
 COUNT_DETAILS = 2
 CAMERA_SERVER_IP = "192.168.43.9"
@@ -11,8 +11,8 @@ LOCAL_CAMERA_PORT = 8889
 man = Manipulator("192.168.43.4", 8888, "g")
 con = Conveer("192.168.43.13", 8888)
 
-man.test()
-con.test()
+# man.test()
+# con.test()
 
 # while True:
 #     x, y, z, g = 0, -300, 200, 0
@@ -25,8 +25,6 @@ con.test()
 #     man.toPoint(x, y, z, a, g)
 
 # con.test()
-
-
 
 
 def get_part_info(timeout: float = 2.0):
@@ -52,14 +50,17 @@ def get_part_info(timeout: float = 2.0):
 pred = get_part_info()[2]
 c = 0
 
+man.home()
+
 while True:
     try:
         obj = get_part_info()
-        if obj[2] == pred:
+        if obj[2] == pred or obj[1] < 450:
             continue
-        print("detal detected", 480 - obj[2])
-        pred = get_part_info[2]
+        print("detal detected", obj)
+        pred = get_part_info()[2]
         man.to_box()
+        pred = get_part_info()[2]
         c += 1
         if c == COUNT_DETAILS:
             c = 0
@@ -67,6 +68,10 @@ while True:
             while c != COUNT_DETAILS:
                 c += 1
                 man.from_box()
+                con.step()
+            man.move_box_left()
             c = 0
     except Exception:
         pass
+
+
