@@ -2,7 +2,7 @@ from tools import Manipulator, Conveer
 import socket
 import time
 
-COUNT_DETAILS = 5
+COUNT_DETAILS = 3
 CAMERA_SERVER_IP = "192.168.43.9"
 CAMERA_SERVER_PORT = 8888
 LOCAL_CAMERA_IP = "192.168.43.111"
