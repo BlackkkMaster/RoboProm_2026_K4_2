@@ -6,7 +6,7 @@ if __name__ == "__main__":
     server = "192.168.43.9"
     udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     udpPort = 8888
-    udp.bind((ip, udpPort))
+    udp.bind((ip, 8889))
 
     while True:
         try:

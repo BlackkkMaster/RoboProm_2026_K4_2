@@ -4,7 +4,7 @@
 #include "DxlMaster.h"
 
 const uint8_t id = 1;
-int16_t speed = -512;
+int16_t speed = -256;
 const long unsigned int baudrate = 57600;
 
 #define UDP_PORT 8888
